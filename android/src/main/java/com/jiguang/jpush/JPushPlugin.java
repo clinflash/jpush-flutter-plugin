@@ -167,6 +167,8 @@ public class JPushPlugin implements FlutterPlugin, MethodCallHandler {
         String channel = (String) map.get("channel");
         JPushInterface.setChannel(context, channel);
 
+        JPushInterface.setLatestNotificationNumber(context, 99);
+
         JPushPlugin.instance.dartIsReady = true;
 
         // try to clean getRid cache
