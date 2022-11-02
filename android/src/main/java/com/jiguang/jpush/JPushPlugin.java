@@ -457,6 +457,13 @@ public class JPushPlugin implements FlutterPlugin, MethodCallHandler {
             String alert = intent.getStringExtra(JPushInterface.EXTRA_ALERT);
             Map<String, Object> extras = getNotificationExtras(intent);
             JPushPlugin.transmitNotificationOpen(title, alert, extras);
+            
+            Intent launch = context.getPackageManager().getLaunchIntentForPackage(context.getPackageName());
+            if (launch != null) {
+                launch.addCategory(Intent.CATEGORY_LAUNCHER);
+                launch.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                context.startActivity(launch);
+            }
         }
 
         private void handlingNotificationReceive(Context context, Intent intent) {
